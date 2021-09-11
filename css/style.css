@@ -1,0 +1,22 @@
+body{
+    background-color: #f8f8f8;
+}
+h1{
+    font-family: "Droid Sans Mono";
+}
+label{
+    font-family: "Droid Sans Mono";
+}
+button{
+    font-family: "Droid Sans Mono";
+}
+a{
+    font-family: "Droid Sans Mono";
+}
+.product-img{
+    height: 250px;
+}
+.cart-product{
+    width: 100px;
+}
+
