@@ -1,4 +1,5 @@
 <?php
+include 'db_connection.php';
 function emailValidate($email){
 $pattern = "/\w+[@][a-zA-z0-9]+[.][a-zA-z0-9]+$/";
     if (preg_match($pattern, $email)){
@@ -45,28 +46,39 @@ function isStrong($password){
     }
 
 }
-
-function insertData($table,$data){
-    print_r(addSingleQuote($data));
-    $columns = implode(",", array_keys($data));
-    $values = implode(",",array_values($data));
-    $insert_query = "INSERT INTO $table ($columns) VALUES $values";
-}
-
-
-$table = "users";
-$data = array(
-    "name" => "Maung Maung",
-    "email" => "mgmg@gmail.com",
-    "phone" => "0993434553",
-    "status" => "active",
-    "address" => "MDY"
-);
-
-insertData($table,$data);
 function addSingleQuote($data){
     foreach ($data as $col => $val){
         $data[$col] = "'$val'";
     }
     return $data;
 }
+
+function insertData($db, $table,$data){
+    $columns = implode(",", array_keys($data));
+    $values = implode(",",array_values(addSingleQuote($data)));
+    $insert_query = "INSERT INTO $table ($columns) VALUES ($values)";
+    $db->exec($insert_query);
+}
+
+function updateData($db,$table,$data,$id){
+    $update_data = null;
+    foreach (addSingleQuote($data) as $col => $val){
+        if (array_key_last($data) != $col){
+            $update_data .= $col."=".$val.",";
+        }else{
+            $update_data .= $col."=".$val;
+        }
+
+    }
+    $update_query = "UPDATE $table SET $update_data WHERE  id = $id ";
+    echo  $update_query;
+    $db->exec($update_query);
+}
+
+$table = "users";
+$data = array(
+    "name" => "Zaw Zaw",
+    "email" => "zawzaw@gmail.com"
+);
+
+updateData($db,$table,$data,1);
