@@ -3983,7 +3983,7 @@ jQuery.extend( {
 		return deferred;
 	},
 
-	// Deferred helper
+	// Deferred ulti
 	when: function( singleValue ) {
 		var
 

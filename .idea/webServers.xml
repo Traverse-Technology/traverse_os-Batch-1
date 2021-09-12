@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ed3de020-5647-4405-a293-f3c67307fbe0" name="localhost" url="http://localhost/traverse_os">
+        <fileTransfer port="0" mountedRoot="C:\xampp\htdocs\traverse_os" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

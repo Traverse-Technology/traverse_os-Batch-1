@@ -45,4 +45,28 @@ function isStrong($password){
     }
 
 }
-echo isStrong("aW!3aW!3");
+
+function insertData($table,$data){
+    print_r(addSingleQuote($data));
+    $columns = implode(",", array_keys($data));
+    $values = implode(",",array_values($data));
+    $insert_query = "INSERT INTO $table ($columns) VALUES $values";
+}
+
+
+$table = "users";
+$data = array(
+    "name" => "Maung Maung",
+    "email" => "mgmg@gmail.com",
+    "phone" => "0993434553",
+    "status" => "active",
+    "address" => "MDY"
+);
+
+insertData($table,$data);
+function addSingleQuote($data){
+    foreach ($data as $col => $val){
+        $data[$col] = "'$val'";
+    }
+    return $data;
+}
