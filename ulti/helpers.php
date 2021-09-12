@@ -9,7 +9,7 @@ $pattern = "/\w+[@][a-zA-z0-9]+[.][a-zA-z0-9]+$/";
     }
 }
 function charCount($data,$count){
-    if (strlen($data) < $count){
+    if (strlen(trim($data)) < $count){
         return false;
     }else{
         return true;
@@ -75,10 +75,6 @@ function updateData($db,$table,$data,$id){
     $db->exec($update_query);
 }
 
-$table = "users";
-$data = array(
-    "name" => "Zaw Zaw",
-    "email" => "zawzaw@gmail.com"
-);
 
-updateData($db,$table,$data,1);
+
+
