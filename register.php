@@ -17,7 +17,8 @@ if (isset($_POST['btn_register'])){
         "password" => md5($password),
         "phone" => $phone,
         "address" => $address,
-        "img" => "img1.png"
+        "role" => "customer",
+        "img" => time().$img['name']
     );
 
     if (!charCount($name,2)){
@@ -57,7 +58,15 @@ if (isset($_POST['btn_register'])){
         $error += $invalid;
     }
     if (empty($error)){
+            upload($img['tmp_name'],$img['name']);
             insertData($db,"users",$data);
+            if (isset($_POST['remember'])){
+                setcookie("userData",json_encode($data),time()+3600);
+            }else{
+                $_SESSION['userData'] = $data;
+            }
+            echo "<script>alert('Register Success')</script>";
+            header("Refresh:0 ; url=index.php");
     }
 
 }
@@ -71,16 +80,19 @@ if (isset($_POST['btn_register'])){
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name" class="text-primary"><b>Name</b></label>
-                    <input type="text" class="form-control <?php echo isset($error['nameCountError']) ? 'is-invalid' : 'is-valid' ?>" id="name" name="name">
+                    <input type="text"  class="form-control <?php
+                    if (isset($_POST['btn_register'])) echo isset($error['nameCountError']) ? 'is-invalid' : 'is-valid';
+
+                    ?>" id="name" name="name">
                     <?php
                     if (isset($error['nameCountError'])){
-                        echo "<small class='text-danger'>".$error['nameCountError']."</small>";
+                        if (isset($_POST['btn_register'])) echo "<small class='text-danger'>".$error['nameCountError']."</small>";
                     }
                     ?>
                 </div>
                 <div class="form-group">
                     <label for="email" class="text-primary"><b>Email</b></label>
-                    <input type="email" class="form-control <?php echo ((isset($error['emailCountError'])) || (isset($error['emailError']))) ? 'is-invalid' : 'is-valid' ?>" id="email" name="email">
+                    <input type="email" class="form-control <?php if (isset($_POST['btn_register']))  echo ((isset($error['emailCountError'])) || (isset($error['emailError']))) ? 'is-invalid' : 'is-valid' ?>" id="email" name="email">
                     <?php
                     if (isset($error['emailCountError'])){
                         echo "<small class='text-danger'>".$error['emailCountError']."</small>";
@@ -94,7 +106,7 @@ if (isset($_POST['btn_register'])){
                 </div>
                 <div class="form-group">
                     <label for="phone" class="text-primary"><b>Phone</b></label>
-                    <input type="text" class="form-control <?php echo isset($error['phoneCountError']) ? 'is-invalid' : 'is-valid' ?>" id="phone" name="phone">
+                    <input type="text" class="form-control <?php if (isset($_POST['btn_register']))  echo isset($error['phoneCountError']) ? 'is-invalid' : 'is-valid' ?>" id="phone" name="phone">
                 </div>
                 <?php
                 if (isset($error['phoneCountError'])){
@@ -103,7 +115,7 @@ if (isset($_POST['btn_register'])){
                 ?>
                 <div class="form-group">
                     <label for="address" class="text-primary"><b>Address</b></label>
-                    <input type="text" class="form-control <?php echo isset($error['addressCountError']) ? 'is-invalid' : 'is-valid' ?>" id="address" name="address">
+                    <input type="text" class="form-control <?php if (isset($_POST['btn_register']))  echo isset($error['addressCountError']) ? 'is-invalid' : 'is-valid' ?>" id="address" name="address">
                 </div>
                 <?php
                 if (isset($error['addressCountError'])){
@@ -112,7 +124,7 @@ if (isset($_POST['btn_register'])){
                 ?>
                 <div class="form-group">
                     <label for="image" class="text-primary"><b>Choose Image</b></label>
-                    <input type="file" class="form-control <?php echo isset($error['imageError']) ? 'is-invalid' : 'is-valid' ?>" id="image" name="image" >
+                    <input type="file" class="form-control <?php if (isset($_POST['btn_register']))  echo isset($error['imageError']) ? 'is-invalid' : 'is-valid' ?>" id="image" name="image" >
                     <?php
                     if (isset($error['imageError'])){
                         echo "<small class='text-danger'>".$error['imageError']."</small>";
@@ -121,7 +133,7 @@ if (isset($_POST['btn_register'])){
                 </div>
                 <div class="form-group">
                     <label for="password" class="text-primary"><b>Password</b></label>
-                    <input type="password" class="form-control <?php echo isset($error['passwordError']) ? 'is-invalid' : 'is-valid' ?>" id="password" name="password">
+                    <input type="password" class="form-control <?php if (isset($_POST['btn_register']))  echo isset($error['passwordError']) ? 'is-invalid' : 'is-valid' ?>" id="password" name="password">
                     <?php
                     if (isset($error['passwordError'])){
                         echo "<small class='text-danger'>".$error['passwordError']."</small>";
@@ -130,7 +142,7 @@ if (isset($_POST['btn_register'])){
                 </div>
                 <div class="form-group">
                     <label for="con_password" class="text-primary"><b>Confirm Password</b></label>
-                    <input type="password" class="form-control <?php echo ((isset($error['con_passwordCountError'])) || (isset($error['con_passwordError']))) ? 'is-invalid' : 'is-valid' ?>" id="con_password" name="con_password">
+                    <input type="password" class="form-control <?php if (isset($_POST['btn_register']))  echo ((isset($error['con_passwordCountError'])) || (isset($error['con_passwordError']))) ? 'is-invalid' : 'is-valid' ?>" id="con_password" name="con_password">
                     <?php
                     if (isset($error['con_passwordCountError'])){
                         echo "<small class='text-danger'>".$error['con_passwordCountError']."</small>";
@@ -150,7 +162,7 @@ if (isset($_POST['btn_register'])){
                 <br>
                 <div class="form-group">
                     <button type="submit" name="btn_register" class="btn btn-outline-primary float-left">Submit</button>
-                    <button type="submit" class="btn btn-outline-danger float-right">Reset</button>
+                    <button type="reset" class="btn btn-outline-danger float-right">Reset</button>
                 </div>
             </form>
                 </div>

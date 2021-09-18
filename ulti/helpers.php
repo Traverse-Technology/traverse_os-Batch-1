@@ -59,6 +59,11 @@ function insertData($db, $table,$data){
     $insert_query = "INSERT INTO $table ($columns) VALUES ($values)";
     $db->exec($insert_query);
 }
+function selectData($db,$table,$condition){
+    $select_query = "SELECT * FROM $table $condition";
+   $data =  $db->query($select_query);
+    return $data->fetchAll();
+}
 
 function updateData($db,$table,$data,$id){
     $update_data = null;
@@ -75,6 +80,7 @@ function updateData($db,$table,$data,$id){
     $db->exec($update_query);
 }
 
-
-
-
+function upload($upload_file,$image_name){
+    $save_file= "upload_file/".time().$image_name;
+    move_uploaded_file($upload_file,$save_file);
+}

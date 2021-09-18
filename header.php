@@ -36,25 +36,63 @@
             <li class="nav-item active">
                 <a class="nav-link" href="contact.php">Contact</a>
             </li>
-            <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Member
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                    <a class="dropdown-item" href="register.php">Register</a>
-                    <a class="dropdown-item" href="login.php">Login</a>
-                </div>
-            </li>
+            <?php
+            session_start();
+            if (!isset($_SESSION['userData']) && !isset($_COOKIE['userData'])) {
+                ?>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Member
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="register.php">Register</a>
+                        <a class="dropdown-item" href="login.php">Login</a>
+                    </div>
+                </li>
+                <?php
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['userData']) || isset($_COOKIE['userData'])) {
+            ?>
             <li class="nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User1
+                    <?php
+                    if(isset($_COOKIE['userData'])){
+                        $userObject = json_decode($_COOKIE['userData']);
+                        echo $userObject->name;
+                    }else{
+                        $userSession = $_SESSION['userData'];
+                        echo $userSession['name'];
+                    }
+                    ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="customer/profile.html">Customer Dashboard</a>
-                    <a class="dropdown-item" href="admin/profile.html">Admin Dashboard</a>
+                    <?php
+                    if (isset($_SESSION['userData'])){
+                        if ($userSession['role'] == "customer"){
+                            echo '<a class="dropdown-item" href="customer/profile.html">Customer Dashboard</a>';
+                        }else{
+                            echo '<a class="dropdown-item" href="admin/profile.html">Admin Dashboard</a>';
+                        }
+                    }else{
+                        if ($userObject->role == "customer"){
+                            echo '<a class="dropdown-item" href="customer/profile.html">Customer Dashboard</a>';
+                        }else{
+                            echo '<a class="dropdown-item" href="admin/profile.html">Admin Dashboard</a>';
+                        }
+                    }
+
+                    ?>
+
+
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
             </li>
+                <?php
+            }
+            ?>
             <li class="nav-item active">
                 <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"> <span class="badge badge-light">4</span></i></a>
             </li>
