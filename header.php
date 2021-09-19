@@ -72,15 +72,15 @@
                     <?php
                     if (isset($_SESSION['userData'])){
                         if ($userSession['role'] == "customer"){
-                            echo '<a class="dropdown-item" href="customer/profile.html">Customer Dashboard</a>';
+                            echo '<a class="dropdown-item" href="customer/profile.php">Customer Dashboard</a>';
                         }else{
-                            echo '<a class="dropdown-item" href="admin/profile.html">Admin Dashboard</a>';
+                            echo '<a class="dropdown-item" href="admin/dashboard/profile.php">Admin Dashboard</a>';
                         }
                     }else{
                         if ($userObject->role == "customer"){
-                            echo '<a class="dropdown-item" href="customer/profile.html">Customer Dashboard</a>';
+                            echo '<a class="dropdown-item" href="customer/profile.php">Customer Dashboard</a>';
                         }else{
-                            echo '<a class="dropdown-item" href="admin/profile.html">Admin Dashboard</a>';
+                            echo '<a class="dropdown-item" href="admin/dashboard/profile.php">Admin Dashboard</a>';
                         }
                     }
 

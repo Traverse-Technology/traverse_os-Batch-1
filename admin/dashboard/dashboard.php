@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Frontendfunn - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 <body>
@@ -59,20 +59,20 @@
         <nav class="navbar-dark">
             <ul class="navbar-nav">
                 <li>
-                    <a href="dashboard.html" class="nav-link px-3 active">
+                    <a href="dashboard.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="profile.html" class="nav-link px-3 active">
+                    <a href="profile.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-person-square"></i></span>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="user-management/view-user.html" class="nav-link px-3 active">
+                    <a href="../user-management/view-user.html" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-person-circle"></i></span>
                         <span>View Users</span>
                     </a>
@@ -90,13 +90,13 @@
                     <div class="collapse" id="layouts">
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a href="product-management/insert-product.html" class="nav-link px-3 active">
+                                <a href="../product-management/insert-product.html" class="nav-link px-3 active">
                                     <span class="me-2"><i class="bi bi-plus-square-fill"></i></span>
                                     <span>Product Insert</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="product-management/view-product.html" class="nav-link px-3 active">
+                                <a href="../product-management/view-product.html" class="nav-link px-3 active">
                                     <span class="me-2"><i class="bi bi-eye-fill"></i></span>
                                     <span>Product View</span>
                                 </a>
@@ -105,7 +105,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="order-system/view-order.html" class="nav-link px-3 active">
+                    <a href="../order-system/view-order.html" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-bag-fill"></i></span>
                         <span>View Order</span>
                     </a>
@@ -206,11 +206,11 @@
     </div>
 </main>
 
-<script src="./js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-<script src="./js/jquery-3.5.1.js"></script>
-<script src="./js/jquery.dataTables.min.js"></script>
-<script src="./js/dataTables.bootstrap5.min.js"></script>
-<script src="./js/script.js"></script>
+<script src="../js/jquery-3.5.1.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/dataTables.bootstrap5.min.js"></script>
+<script src="../js/script.js"></script>
 </body>
 </html>

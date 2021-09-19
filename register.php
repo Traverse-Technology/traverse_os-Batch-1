@@ -33,6 +33,10 @@ if (isset($_POST['btn_register'])){
         $invalid = array("emailError"=>"Email format is wrong");
         $error += $invalid;
     }
+    if (!empty(selectData($db,'users','WHERE email='.$email))){
+        $invalid = array("uniqueEmail"=>"Email is already existed!");
+        $error += $invalid;
+    }
     if (!charCount($phone,11)){
         $invalid = array("phoneCountError"=>"Phone must be filled at least 11 characters");
         $error += $invalid;
@@ -99,6 +103,8 @@ if (isset($_POST['btn_register'])){
                     }else{
                         if (isset($error['emailError'])){
                             echo "<small class='text-danger'>".$error['emailError']."</small>";
+                        }elseif (isset($error['uniqueEmail'])){
+                            echo "<small class='text-danger'>".$error['uniqueEmail']."</small>";
                         }
 
                     }

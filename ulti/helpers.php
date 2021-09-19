@@ -59,11 +59,17 @@ function insertData($db, $table,$data){
     $insert_query = "INSERT INTO $table ($columns) VALUES ($values)";
     $db->exec($insert_query);
 }
-function selectData($db,$table,$condition){
+function selectData($db,$table,$condition=null){
     $select_query = "SELECT * FROM $table $condition";
    $data =  $db->query($select_query);
     return $data->fetchAll();
 }
+function deleteData($db,$table,$condition=null){
+    $select_query = "DELETE FROM $table $condition";
+    $db->exec($select_query);
+}
+$user_arrrays = selectData($db,'users',"WHERE id = 5");
+
 
 function updateData($db,$table,$data,$id){
     $update_data = null;
@@ -76,7 +82,6 @@ function updateData($db,$table,$data,$id){
 
     }
     $update_query = "UPDATE $table SET $update_data WHERE  id = $id ";
-    echo  $update_query;
     $db->exec($update_query);
 }
 
