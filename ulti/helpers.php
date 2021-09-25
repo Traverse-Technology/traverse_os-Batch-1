@@ -85,7 +85,12 @@ function updateData($db,$table,$data,$id){
     $db->exec($update_query);
 }
 
-function upload($upload_file,$image_name){
-    $save_file= "upload_file/".time().$image_name;
+function upload($upload_file,$image_name,$path="public"){
+    if ($path == "public"){
+        $save_file= "upload_file/".time().$image_name;
+    }else{
+        $save_file= "../../upload_file/".time().$image_name;
+    }
     move_uploaded_file($upload_file,$save_file);
 }
+

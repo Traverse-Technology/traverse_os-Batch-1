@@ -90,13 +90,13 @@
                     <div class="collapse" id="layouts">
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a href="../product-management/insert-product.html" class="nav-link px-3 active">
+                                <a href="../product-management/insert-product.php" class="nav-link px-3 active">
                                     <span class="me-2"><i class="bi bi-plus-square-fill"></i></span>
                                     <span>Product Insert</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="../product-management/view-product.html" class="nav-link px-3 active">
+                                <a href="../product-management/view-product.php" class="nav-link px-3 active">
                                     <span class="me-2"><i class="bi bi-eye-fill"></i></span>
                                     <span>Product View</span>
                                 </a>

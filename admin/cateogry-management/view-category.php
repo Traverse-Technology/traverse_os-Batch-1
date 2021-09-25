@@ -11,7 +11,7 @@ $categories = selectData($db,'categories');
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="text-center"><b>View Product</b></h5>
+                        <h5 class="text-center"><b>View Categories</b></h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
