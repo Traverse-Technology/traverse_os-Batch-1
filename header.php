@@ -1,3 +1,8 @@
+<?php
+include "ulti/helpers.php";
+$categories = selectData($db,"categories");
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,8 +34,12 @@
                     Product
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="product.php">Kid</a>
-                    <a class="dropdown-item" href="product.php">Women</a>
+                    <?php
+                    foreach ($categories as $category){
+                        echo '<a class="dropdown-item" href="product.php?cat_id='.$category['id'].'">'.$category['name'].'</a>';
+                    }
+                    ?>
+
                 </div>
             </li>
             <li class="nav-item active">
@@ -97,9 +106,9 @@
                 <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"> <span class="badge badge-light">4</span></i></a>
             </li>
         </ul>
-        <form action="search-product.php" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        <form method="get" action="search-product.php" class="form-inline my-2 my-lg-0">
+            <input name="keyword"  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button name="btn_search" class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>

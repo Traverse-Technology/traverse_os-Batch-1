@@ -45,7 +45,7 @@ $products= $data->fetchAll();
                                     echo "<tr>";
                                     echo "<td>".$counter."</td>";
                                     echo "<td>".$product['product_name']."</td>";
-                                    echo "<td>".$product['product_name']."</td>";
+                                    echo "<td>".$product['product_price']."</td>";
                                     echo "<td>".$product['name']."</td>";
                                     echo "<td>".$product['inStock']."</td>";
                                     echo '<td>
@@ -57,10 +57,10 @@ $products= $data->fetchAll();
                                     echo "<td>".$product['created_at']."</td>";
                                     echo "<td>".$product['updated_at']."</td>";
                                     echo "<td>
-<a href='update-category.php?id=".$product[0]."' class='btn btn-outline-danger'>
+<a href='update-product.php?id=".$product[0]."' class='btn btn-outline-danger'>
 <i class='bi bi-pen'></i>
 </a>
-<a href='delete-category.php?id=".$product[0]."' class='btn btn-outline-danger'>
+<a href='delete-product.php?id=".$product[0]."' class='btn btn-outline-danger'>
 <i class='bi bi-trash'></i>
 </a>
 </td>";
