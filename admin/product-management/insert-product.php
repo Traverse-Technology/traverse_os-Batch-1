@@ -17,7 +17,7 @@ if (isset($_POST['product_insert'])){
         "inStock" => $inStock,
         "description" => $description,
         "category_id" => $category_id,
-        "product_image" => time().$product_image['name'],
+        "product_image" => time().$product_image['name']
   );
   insertData($db,'products',$data);
   upload($product_image['tmp_name'],$product_image['name'],"admin");

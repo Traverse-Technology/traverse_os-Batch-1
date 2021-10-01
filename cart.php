@@ -15,58 +15,13 @@ include "header.php"
                 <th scope="col">Product Name</th>
                 <th scope="col">Product Image</th>
                 <th scope="col">Quantity</th>
+                <th scope="col">Unique Price</th>
                 <th scope="col">Total Price</th>
                 <th scope="col">Delete</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>watch</td>
-                <td>
-                    <img class="cart-product" src="img/watch.png" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-outline-primary btn-sm" >+</button>
-                    1
-                    <button class="btn btn-outline-primary btn-sm" >-</button>
-                </td>
-                <td>$2000</td>
-                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>watch</td>
-                <td>
-                    <img class="cart-product" src="img/watch.png" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-outline-primary btn-sm" >+</button>
-                    1
-                    <button class="btn btn-outline-primary btn-sm" >-</button>
-                </td>
-                <td>$2000</td>
-                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>watch</td>
-                <td>
-                    <img class="cart-product" src="img/watch.png" alt="">
-                </td>
-                <td>
-                    <button class="btn btn-outline-primary btn-sm" >+</button>
-                    1
-                    <button class="btn btn-outline-primary btn-sm" >-</button>
-                </td>
-                <td>$2000</td>
-                <td><button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button></td>
-            </tr>
-          <tr>
-              <th >Total Price</th>
-              <td colspan="4"></td>
-              <th >$6000</th>
-          </tr>
+            <tbody id="tbody">
+
             </tbody>
         </table>
                 <div class="col text-center">
@@ -81,3 +36,68 @@ include "header.php"
 <?php
 include "footer.php"
 ?>
+
+<script>
+    showCart();
+function showCart() {
+    var productData = JSON.parse(localStorage.getItem('productData'));
+    var str = "";
+    for (let i=0; i < productData.length; i++){
+        let count = i+1;
+        let totalPrice = productData[i].qty *  productData[i].product_price;
+        str += `
+            <tr>
+                <td>`+count+`</td>
+                <td>`+productData[i].product_name+`</td>
+                <td>
+                    <img class="cart-product" src="upload_file/`+productData[i].product_image+`" alt="">
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm" onclick="increaseQty(${productData[i].qty},${productData[i].id})">+</button>
+                    `+productData[i].qty+`
+                    <button class="btn btn-outline-primary btn-sm" onclick="decreaseQty(${productData[i].qty},${productData[i].id})">-</button>
+                </td>
+                <td>$`+productData[i].product_price+`</td>
+                <td>$`+totalPrice+`</td>
+                <td><button  onclick="deleteitem(${productData[i].id})" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            `;
+    }
+    $("#tbody").html(str);
+}
+    
+    function increaseQty(qty,id) {
+        var productData = JSON.parse(localStorage.getItem('productData'));
+        for (let i=0; i < productData.length; i++){
+            if (productData[i].id == id){
+                productData[i].qty += 1;
+                localStorage.setItem('productData',JSON.stringify(productData));
+            }
+        }
+        showCart();
+    }
+    function decreaseQty(qty,id) {
+        var productData = JSON.parse(localStorage.getItem('productData'));
+        for (let i=0; i < productData.length; i++){
+            if (productData[i].id == id){
+                if (productData[i].qty > 1){
+                    productData[i].qty -= 1;
+                }
+                localStorage.setItem('productData',JSON.stringify(productData));
+            }
+        }
+        showCart();
+    }
+    function deleteitem(id) {
+        var productData = JSON.parse(localStorage.getItem('productData'));
+        for (let i=0; i < productData.length; i++){
+            if (productData[i].id == id){
+                productData.splice(i);
+                 delete productData[i];
+            }
+        }
+        localStorage.setItem('productData',JSON.stringify(productData));
+        showCart();
+    }
+
+</script>

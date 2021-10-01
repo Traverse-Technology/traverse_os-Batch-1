@@ -103,7 +103,7 @@ $categories = selectData($db,"categories");
             }
             ?>
             <li class="nav-item active">
-                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"> <span class="badge badge-light">4</span></i></a>
+                <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"> <span id="count" class="badge badge-light">0</span></i></a>
             </li>
         </ul>
         <form method="get" action="search-product.php" class="form-inline my-2 my-lg-0">

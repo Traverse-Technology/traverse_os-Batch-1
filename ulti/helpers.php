@@ -64,6 +64,11 @@ function selectData($db,$table,$condition=null){
    $data =  $db->query($select_query);
     return $data->fetchAll();
 }
+function selectCustomData($db,$table,$col,$condition=null){
+    $select_query = "SELECT $col FROM $table $condition";
+   $data =  $db->query($select_query);
+    return $data->fetchAll();
+}
 function deleteData($db,$table,$condition=null){
     $select_query = "DELETE FROM $table $condition";
     $db->exec($select_query);
@@ -94,3 +99,7 @@ function upload($upload_file,$image_name,$path="public"){
     move_uploaded_file($upload_file,$save_file);
 }
 
+function changeQoute($data){
+    $data = str_replace("\"","'",$data);
+    return $data;
+}
