@@ -27,17 +27,8 @@ $products = selectData($db,'products','ORDER BY id DESC LIMIT 6');
         </div>
 
     </div>
-    <script>
-        productArray = [];
-        function addToCart(productData) {
-            var isDuplicate = false;
-            productData[0].qty=1;
-            productArray.push(productData[0]);
-            console.log(productArray);
-            localStorage.setItem('productData',JSON.stringify(productArray));
-            $("#count").html(productArray.length);
-        }
-    </script>
+
 <?php
 include "footer.php"
 ?>
+

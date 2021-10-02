@@ -1,7 +1,51 @@
 <?php
-include "header.php"
-?>
+include "header.php";
+date_default_timezone_set("Asia/Yangon");
+if (isset($_POST['products'])){
+    if (isset($_SESSION['userData']) || isset($_COOKIE['userData'])) {
+        $products = $_POST['products'];
+        $finalQty = 0;
+        $fianlPrice = 0;
+        $uid = 0;
+        if (isset($_SESSION['userData'])){
+            $userSession = $_SESSION['userData'];
+            $uid = $userSession['id'];
+        }else{
+            $userObject = json_decode($_COOKIE['userData']);
+            $uid = $userObject->id;
+        }
+        foreach ($products as $product){
+            $data = array(
+                "order_no" => md5(strval(time())),
+                "product_id" =>$product['id'],
+                "qty" =>$product['qty'],
+                "unit_price" => $product['product_price'],
+                "total_price" => $product['qty'] * $product['product_price']
+            );
+            $finalQty += $product['qty'];
+            $fianlPrice += $product['product_price'];
+            insertData($db,'order_detail',$data);
+        }
 
+        $orderData = array(
+            "user_id" => $uid,
+            "order_no" => md5(strval(time())),
+            "total_qty" =>$finalQty,
+            "final_price" =>$fianlPrice,
+            "month" => date("M"),
+            "year" => date("Y"),
+        );
+        insertData($db,'orders',$orderData);
+
+
+
+
+    }else{
+        echo "Need to login";
+    }
+
+}
+?>
 <h1 class="text-center text-dark mt-5"><b>Add to Cart</b></h1>
 <div class="container mt-4">
 <div class="row">
@@ -23,9 +67,13 @@ include "header.php"
             <tbody id="tbody">
 
             </tbody>
+            <tfooter >
+                <tr id="tfooter">
+                </tr>
+            </tfooter>
         </table>
                 <div class="col text-center">
-                <button class="btn btn-outline-primary">Check Out</button>
+                <button class="btn btn-outline-primary" onclick="checkout()">Check Out</button>
                 </div>
             </div>
         </div>
@@ -38,7 +86,24 @@ include "footer.php"
 ?>
 
 <script>
+
     showCart();
+    finalPrice();
+    function finalPrice() {
+        var finalPrice = 0;
+        var productData = JSON.parse(localStorage.getItem('productData'));
+        for (let i=0; i < productData.length; i++){
+            finalPrice += productData[i].qty * productData[i].product_price;
+        }
+var str = `
+
+                    <td  colspan="6">Final Price</td>
+                    <td>$`+finalPrice+`</td>
+
+`
+        $("#tfooter").html(str);
+
+    }
 function showCart() {
     var productData = JSON.parse(localStorage.getItem('productData'));
     var str = "";
@@ -75,6 +140,7 @@ function showCart() {
             }
         }
         showCart();
+        finalPrice();
     }
     function decreaseQty(qty,id) {
         var productData = JSON.parse(localStorage.getItem('productData'));
@@ -87,17 +153,45 @@ function showCart() {
             }
         }
         showCart();
+        finalPrice();
     }
     function deleteitem(id) {
         var productData = JSON.parse(localStorage.getItem('productData'));
         for (let i=0; i < productData.length; i++){
             if (productData[i].id == id){
-                productData.splice(i);
-                 delete productData[i];
+                productData.splice(i,1);
             }
         }
         localStorage.setItem('productData',JSON.stringify(productData));
         showCart();
+        finalPrice();
+        showCount();
+    }
+
+    function checkout() {
+        var productData = JSON.parse(localStorage.getItem('productData'));
+        $.ajax({
+            url: "cart.php",
+            type: "post",
+            data:{
+                products:productData
+            },
+            success:function (response) {
+                console.log(response);
+                let needLogin = response.match(/Need to login/g).length;
+                console.log(needLogin);
+                if (needLogin == 2){
+                    alert("Need login first");
+                }else {
+                    alert("Order Success!");
+                    localStorage.removeItem('productData');
+                    window.location.replace('index.php');
+                }
+            },
+            error:function (error) {
+                console.log(error)
+            }
+        })
     }
 
 </script>
