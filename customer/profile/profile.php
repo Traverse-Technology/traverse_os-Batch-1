@@ -1,5 +1,4 @@
 <?php
-ob_start();
 include '../../ulti/helpers.php';
 include '../layouts/header.php';
 if (isset($_SESSION['userData']) || isset($_COOKIE['userData'])) {
@@ -13,7 +12,7 @@ if (isset($_SESSION['userData']) || isset($_COOKIE['userData'])) {
         $role = $userObject->role;
     }
 
-    if ($role == "admin"){
+    if ($role == "customer"){
         $user = selectData($db,'users','WHERE id ='.$uid);
       if (isset($_POST['btn_update'])){
           $name = $_POST['name'];

@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../user-management/view-user.html" class="nav-link px-3 active">
+                    <a href="../user-management/view-user.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-person-circle"></i></span>
                         <span>View Users</span>
                     </a>
@@ -105,7 +105,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../order-system/view-order.html" class="nav-link px-3 active">
+                    <a href="../order-system/view-order.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-bag-fill"></i></span>
                         <span>View Order</span>
                     </a>

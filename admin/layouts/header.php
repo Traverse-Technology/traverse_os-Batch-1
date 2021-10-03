@@ -55,20 +55,20 @@
         <nav class="navbar-dark">
             <ul class="navbar-nav">
                 <li>
-                    <a href="dashboard.php" class="nav-link px-3 active">
+                    <a href="../dashboard/dashboard.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="profile.php" class="nav-link px-3 active">
+                    <a href="../dashboard/profile.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-person-square"></i></span>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="user-management/view-user.html" class="nav-link px-3 active">
+                    <a href="../user-management/view-user.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-person-circle"></i></span>
                         <span>View Users</span>
                     </a>
@@ -132,7 +132,7 @@
 
 
                 <li>
-                    <a href="order-system/view-order.html" class="nav-link px-3 active">
+                    <a href="../order-system/view-order.php" class="nav-link px-3 active">
                         <span class="me-2"><i class="bi bi-bag-fill"></i></span>
                         <span>View Order</span>
                     </a>
