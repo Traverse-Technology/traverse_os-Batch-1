@@ -20,7 +20,9 @@ if (isset($_POST['products'])){
                 "product_id" =>$product['id'],
                 "qty" =>$product['qty'],
                 "unit_price" => $product['product_price'],
-                "total_price" => $product['qty'] * $product['product_price']
+                "total_price" => $product['qty'] * $product['product_price'],
+                "month" => date("m"),
+                "year" => date("Y")
             );
             $finalQty += $product['qty'];
             $fianlPrice += $product['product_price'];
@@ -32,7 +34,7 @@ if (isset($_POST['products'])){
             "order_no" => md5(strval(time())),
             "total_qty" =>$finalQty,
             "final_price" =>$fianlPrice,
-            "month" => date("M"),
+            "month" => date("m"),
             "year" => date("Y"),
         );
         insertData($db,'orders',$orderData);
